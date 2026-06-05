@@ -1,3 +1,9 @@
+export const config = {
+  api: {
+    bodyParser: true,
+  },
+};
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -28,14 +34,14 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error('Anthropic error:', data);
+      console.error('Anthropic error:', JSON.stringify(data));
       return res.status(500).json({ error: 'API error', detail: data });
     }
 
     return res.status(200).json({ reply: data.content[0].text });
 
   } catch (err) {
-    console.error('Handler error:', err);
+    console.error('Handler error:', err.message);
     return res.status(500).json({ error: 'Internal server error', detail: err.message });
   }
 }
