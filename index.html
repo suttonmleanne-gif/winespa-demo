@@ -528,7 +528,7 @@ async function sendMessage(text) {
     });
 
     const data = await response.json();
-    const reply = data.content?.[0]?.text || "Sorry, I had trouble with that. Please try again!";
+    const reply = data.reply || "Sorry, I had trouble with that. Please try again!";
     removeTyping();
     messages.push({ role: 'assistant', content: reply });
     addMessage('assistant', reply);
