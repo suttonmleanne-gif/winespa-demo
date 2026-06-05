@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vino — The Wine Spa Concierge</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1200 40%, #1a0a00 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Georgia', serif;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  max-height: 800px;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, rgba(120,30,10,0.9), rgba(80,15,5,0.95));
+  border: 1px solid rgba(180,80,30,0.4);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  padding: 24px 28px 20px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.logo-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #c8401a, #8b1a05);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 15px rgba(200,64,26,0.4);
+}
+
+.header-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: #f5d9b0;
+  letter-spacing: 1px;
+}
+
+.header-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: rgba(200,140,80,0.8);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.status-line { display: flex; align-items: center; }
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: rgba(180,130,80,0.7);
+  letter-spacing: 1px;
+}
+
+.messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px;
+  background: rgba(15,5,0,0.92);
+  border-left: 1px solid rgba(120,40,10,0.3);
+  border-right: 1px solid rgba(120,40,10,0.3);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120,40,10,0.4) transparent;
+}
+
+.messages-area::-webkit-scrollbar { width: 4px; }
+.messages-area::-webkit-scrollbar-thumb { background: rgba(120,40,10,0.5); border-radius: 2px; }
+
+.time-badge {
+  text-align: center;
+  margin: 8px 0 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  color: rgba(140,90,50,0.5);
+  letter-spacing: 1px;
+}
+
+.message-row {
+  display: flex;
+  margin-bottom: 18px;
+  animation: fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-row.user { justify-content: flex-end; }
+.message-row.assistant { justify-content: flex-start; align-items: flex-end; }
+
+.vino-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #8b1a05, #c8401a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.message-bubble {
+  max-width: 78%;
+  padding: 14px 18px;
+  border-radius: 18px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.message-bubble.user {
+  background: linear-gradient(135deg, #7a2010, #5a1208);
+  color: #fde8d0;
+  border-radius: 18px 18px 4px 18px;
+  border: 1px solid rgba(180,70,30,0.4);
+}
+
+.message-bubble.assistant {
+  background: rgba(35,15,5,0.9);
+  color: #e8cba8;
+  border-radius: 18px 18px 18px 4px;
+  border: 1px solid rgba(100,40,15,0.5);
+}
+
+.suggestions-area {
+  padding: 12px 20px 4px;
+  background: rgba(15,5,0,0.92);
+  border-left: 1px solid rgba(120,40,10,0.3);
+  border-right: 1px solid rgba(120,40,10,0.3);
+}
+
+.suggestions-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  color: rgba(160,100,50,0.6);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.suggestions-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.suggestions-scroll::-webkit-scrollbar { display: none; }
+
+.suggestion-chip {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  background: rgba(80,25,8,0.6);
+  border: 1px solid rgba(140,60,20,0.5);
+  border-radius: 20px;
+  color: #d4a574;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.suggestion-chip:hover {
+  background: rgba(120,40,15,0.8);
+  border-color: rgba(200,80,30,0.6);
+  color: #f5c898;
+  transform: translateY(-1px);
+}
+
+.input-area {
+  background: rgba(20,8,2,0.95);
+  border: 1px solid rgba(120,40,10,0.4);
+  border-radius: 0 0 20px 20px;
+  padding: 16px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.input-field {
+  flex: 1;
+  background: rgba(40,15,5,0.8);
+  border: 1px solid rgba(120,50,15,0.4);
+  border-radius: 14px;
+  padding: 12px 16px;
+  color: #e8cba8;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  resize: none;
+  outline: none;
+  min-height: 46px;
+  max-height: 120px;
+  transition: border-color 0.2s;
+  line-height: 1.5;
+}
+
+.input-field::placeholder { color: rgba(160,100,60,0.5); }
+.input-field:focus { border-color: rgba(180,70,30,0.7); }
+
+.send-button {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, #c8401a, #8b1a05);
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(200,64,26,0.35);
+}
+
+.send-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(200,64,26,0.5);
+}
+
+.send-button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 4px 2px;
+  align-items: center;
+}
+
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  background: rgba(180,100,50,0.7);
+  border-radius: 50%;
+  animation: typing 1.2s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">
+    <div class="logo-area">
+      <div class="logo-icon">🍷</div>
+      <div>
+        <div class="header-title">The Wine Spa</div>
+        <div class="header-subtitle">Portland's Home of Vinotherapy</div>
+      </div>
+    </div>
+    <div class="status-line">
+      <span class="status-dot"></span>
+      <span class="status-text">Vino is online — ask me anything</span>
+    </div>
+  </div>
+
+  <div class="messages-area" id="messages">
+    <div class="time-badge">TODAY</div>
+    <div class="message-row assistant">
+      <div class="vino-avatar">🍷</div>
+      <div class="message-bubble assistant">Hi! I'm Vino, your Wine Spa concierge 🍷 Whether you're curious about vinotherapy, looking for the perfect treatment, or planning a group celebration — I'm here to help. What can I do for you?</div>
+    </div>
+  </div>
+
+  <div class="suggestions-area" id="suggestions">
+    <div class="suggestions-label">Try asking</div>
+    <div class="suggestions-scroll">
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">What is vinotherapy?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">What's your most popular treatment?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Do you have options for couples?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">How much does it cost?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Can I book a bachelorette party?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">What's the difference between Portland and Dundee?</button>
+    </div>
+  </div>
+
+  <div class="input-area">
+    <textarea class="input-field" id="input" placeholder="Ask about treatments, pricing, groups..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button class="send-button" id="sendBtn" onclick="sendMessage()" disabled>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const SYSTEM_PROMPT = `You are Vino, the friendly and knowledgeable AI concierge for The Wine Spa — Portland's first and only wine spa, and one of Time Magazine's 100 Greatest Places to Visit in 2025. You speak with warmth, a little wit, and genuine enthusiasm for what makes this place special. You never sound robotic or corporate.
+
+Your job is to answer questions, help guests choose the right treatment, and guide them toward booking. Always end responses with a gentle nudge toward booking when appropriate.
+
+Booking link (Portland): https://thewinespa.zenoti.com/webstoreNew/services
+Booking link (Dundee): https://thewinespa.zenoti.com/webstoreNew/services/0181a2fe-f8dc-43dd-b963-9e819e5858d2
+Gift cards: https://thewinespa.zenoti.com/webstoreNew/giftcards/37b722db-0e04-4ca8-8abd-abec2b3feb5a
+Group bookings: call 503-946-8450 or email hello@thewinespapdx.com
+Website: https://thewinespa.com
+
+ABOUT THE WINE SPA:
+The Wine Spa is Portland's first dedicated wine spa and the first of its kind in the US. Inspired by vinotherapy traditions from Eastern Europe and ancient history (Cleopatra bathed in wine!), it combines Willamette Valley wines with modern wellness science. Named one of Time's 100 Greatest Places in the World to Visit in 2025. Woman-owned. Eco-conscious — they upcycle surplus wine from local Willamette Valley wineries (current partner: Terra Vina Winery).
+
+WHAT IS VINOTHERAPY?
+Vinotherapy harnesses the antioxidant power of grape and vine — resveratrol, polyphenols, vitamins — for skincare and relaxation. The soaking tubs contain a blend of epsom salts, botanicals, warm water, and wine, set to 100-104 degrees. Rich in antioxidants that combat aging, hydrate skin, and promote collagen production. Multi-sensory: wine scent, soft jets, low lighting.
+
+PORTLAND LOCATION:
+Address: 1517 NE Broadway, Portland, OR 97232
+Phone: 503-946-8450
+Hours: Sunday 12-6pm, Monday 12-6pm, Tuesday 11-7pm, Wednesday CLOSED, Thursday 11-7pm, Friday 11-7pm, Saturday 10-7pm
+Facility: 10 rooms — 4 vinotherapy tub rooms, 5 massage rooms, 1 couples massage room
+
+DUNDEE LOCATION:
+Located inside The Dundee Hotel, Dundee Hills, Willamette Valley wine country. Features vinotherapy foot soaks, massages, facials, wine tasting flights, and a wine bar. Social spa designed for relaxing and celebrating.
+
+PORTLAND VINOTHERAPY PACKAGES:
+- The Willamette: 150 mins, $399 — wine soak + 50-min massage + grape glow body scrub + 30-min facial. Ultimate package.
+- Que Syrah: 85 mins, $249 — wine soak + hydrating body treatment + 30-min facial
+- Pinot Dreams Deluxe: 105 mins, $275 — wine soak + 80-min massage + hot towels. Most popular extended version.
+- Pinot Dreams: 75 mins, $199 — wine soak + 50-min massage + hot towels. Guest favorite.
+- Grape Escape: 75 mins, $199 — wine soak + 50-min Caudalie facial. Face-focused.
+- The Merlot Glow: 75 mins, $149 — body scrub + wine soak + hydrating body treatment.
+- D-I-Wine for 1: 45 mins, $99 — DIY wine soak with self-applied scrub + face mask + glass of wine.
+- D-I-Wine for 2: 45 mins, $179 — same as above for two people sharing a tub.
+
+PORTLAND MASSAGES:
+- Relaxation Massage: 50 min $125 / 80 min $199
+- Deep Tissue Flow: 50 min $125 / 80 min $199
+- 2-Hour Massage: 120 mins, $279
+- Four-Hands Massage: 50 min $299 / 80 min $349
+- Duet Massage (side by side for two, includes wine): 50 min $249 / 80 min $399
+- Reflexology: 50 min $150 / 80 min $225
+
+PORTLAND FACIALS:
+- Vino Express Facial: 30 min, $99
+- Resveratrol Lift: 50 min, $235
+- Dermaplane VinoGlow: 50 min, $235
+- Custom Facial: 80 min, $235
+- Lymphatic Drainage Facial: 60 min, $179
+
+ADD-ONS: Hot Stone +$35, CBD Relief +$30, Scalp Massage +$20, Charcuterie $65/$125/$199
+
+DUNDEE VINOTHERAPY PACKAGES (foot soaks instead of full tub):
+- The Willamette: 120 mins, $399 — foot soak + 50-min massage + 30-min facial
+- Pinot Dreams Deluxe: 100 mins, $249 — foot soak + 80-min massage
+- Pinot Dreams: 70 mins, $175 — foot soak + 50-min massage
+- Grape Escape: 70 mins, $199 — foot soak + 50-min facial
+- The Vino Duet: 70 min $299 / 100 min $399 — couples foot soak + side by side treatment
+
+DUNDEE FOOT SOAKS:
+- The Grape Vine: 50 min, $125 — Pinot Noir soak + massage + wine
+- The Rose: 40 min, $99 — rose wine + rose buds + massage + wine
+- The Gris: 40 min, $99 — white wine + eucalyptus + peppermint + massage + wine
+
+DUNDEE ADD-ONS: Wine Tasting Flight +$35 (Dundee exclusive)
+
+PRIVATE EVENTS AND GROUPS:
+Perfect for birthdays and bachelorettes. Groups up to 10.
+Host rewards: bring 3 friends = $50 off, bring 5 friends = $100 off, bring 8 friends = FREE treatment up to $225 + private spa.
+All groups of 4+ get a bottle of wine.
+Must book by calling 503-946-8450 or emailing hello@thewinespapdx.com.
+Book 2-4 weeks in advance especially for weekends.
+
+FAQ:
+- Must be 21+ for vinotherapy
+- Rooms are fully private, wear whatever you want
+- Two people can share a tub but it is cozy, separate tubs recommended
+- Not intoxicating, alcohol does not absorb through skin
+- Will not stain skin
+- Does smell like wine
+- Non-alcoholic option available with Cabernet bath bombs
+- No outside alcohol allowed
+- Pregnant guests should consult physician first
+
+Keep responses concise, warm, and helpful. When recommending, ask one or two quick questions first. Always include a booking link when nudging toward booking.`;
+
+let messages = [];
+let loading = false;
+
+const input = document.getElementById('input');
+const sendBtn = document.getElementById('sendBtn');
+const messagesArea = document.getElementById('messages');
+const suggestions = document.getElementById('suggestions');
+
+input.addEventListener('input', () => {
+  sendBtn.disabled = !input.value.trim() || loading;
+});
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (!sendBtn.disabled) sendMessage();
+  }
+}
+
+function sendSuggestion(btn) {
+  sendMessage(btn.textContent);
+}
+
+function addMessage(role, content) {
+  const row = document.createElement('div');
+  row.className = `message-row ${role}`;
+
+  if (role === 'assistant') {
+    const avatar = document.createElement('div');
+    avatar.className = 'vino-avatar';
+    avatar.textContent = '🍷';
+    row.appendChild(avatar);
+  }
+
+  const bubble = document.createElement('div');
+  bubble.className = `message-bubble ${role}`;
+  bubble.innerHTML = content.replace(/\n/g, '<br>');
+  row.appendChild(bubble);
+
+  messagesArea.appendChild(row);
+  messagesArea.scrollTop = messagesArea.scrollHeight;
+  return bubble;
+}
+
+function showTyping() {
+  const row = document.createElement('div');
+  row.className = 'message-row assistant';
+  row.id = 'typing';
+
+  const avatar = document.createElement('div');
+  avatar.className = 'vino-avatar';
+  avatar.textContent = '🍷';
+  row.appendChild(avatar);
+
+  const bubble = document.createElement('div');
+  bubble.className = 'message-bubble assistant';
+  bubble.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  row.appendChild(bubble);
+
+  messagesArea.appendChild(row);
+  messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+
+function removeTyping() {
+  const typing = document.getElementById('typing');
+  if (typing) typing.remove();
+}
+
+async function sendMessage(text) {
+  const userText = text || input.value.trim();
+  if (!userText || loading) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  sendBtn.disabled = true;
+  suggestions.style.display = 'none';
+  loading = true;
+
+  messages.push({ role: 'user', content: userText });
+  addMessage('user', userText);
+  showTyping();
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: messages
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.content?.[0]?.text || "Sorry, I had trouble with that. Please try again!";
+    removeTyping();
+    messages.push({ role: 'assistant', content: reply });
+    addMessage('assistant', reply);
+  } catch(e) {
+    removeTyping();
+    addMessage('assistant', 'Something went wrong. Please try again!');
+  }
+
+  loading = false;
+  sendBtn.disabled = !input.value.trim();
+  input.focus();
+}
+</script>
+</body>
+</html>
