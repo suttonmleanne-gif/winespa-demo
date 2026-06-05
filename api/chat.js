@@ -31,7 +31,9 @@ LOCATIONS:
 Portland: 1517 NE Broadway, Portland, OR 97232, phone (503) 946-8450
 Dundee: inside The Dundee Hotel, 1410 OR-99W Suite 100, Dundee, OR 97115
 
-HOURS PORTLAND: Sunday and Monday 12-6pm, Tuesday 11-7pm, Wednesday CLOSED, Thursday and Friday 11-7pm, Saturday 10-7pm
+HOURS PORTLAND: Monday-Tuesday 10am-6pm, Wednesday-Thursday 10am-7pm, Friday-Saturday 10am-6pm, Sunday 10am-6pm
+
+HOURS DUNDEE: Open daily 9am-7pm, phone (503) 487-6060you
 
 BOOKING: thewinespa.zenoti.com or call (503) 946-8450. Email: hello@thewinespapdx.com
 
