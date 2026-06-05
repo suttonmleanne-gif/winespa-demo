@@ -10,12 +10,12 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f1f1a 0%, #2D5C4E 40%, #0f1f1a 100%);
+  background: #f0ece4;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  font-family: 'Georgia', serif;
+  font-family: Georgia, serif;
 }
 
 .chat-container {
@@ -25,50 +25,21 @@ body {
   flex-direction: column;
   height: 90vh;
   max-height: 800px;
+  box-shadow: 0 8px 48px rgba(45,92,78,0.15);
+  border-radius: 20px;
 }
 
 .chat-header {
-  background: linear-gradient(135deg, rgba(45,92,78,0.95), rgba(26,55,46,0.98));
-  border: 1px solid rgba(45,92,78,0.4);
-  border-bottom: none;
+  background: #2D5C4E;
   border-radius: 20px 20px 0 0;
-  padding: 24px 28px 20px;
+  padding: 20px 28px 16px;
 }
 
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+.logo-img {
+  display: block;
+  height: 52px;
+  width: auto;
   margin-bottom: 10px;
-}
-
-.logo-icon {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #2D5C4E, #1a3d33);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  box-shadow: 0 4px 15px rgba(45,92,78,0.4);
-}
-
-.header-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 26px;
-  font-weight: 300;
-  color: #f5d9b0;
-  letter-spacing: 1px;
-}
-
-.header-subtitle {
-  font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  color: rgba(200,140,80,0.8);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-top: 2px;
 }
 
 .status-line { display: flex; align-items: center; }
@@ -89,9 +60,9 @@ body {
 }
 
 .status-text {
-  font-family: 'Jost', sans-serif;
+  font-family: Jost, sans-serif;
   font-size: 11px;
-  color: rgba(180,130,80,0.7);
+  color: rgba(240,236,228,0.65);
   letter-spacing: 1px;
 }
 
@@ -99,22 +70,20 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 24px 20px;
-  background: rgba(15,5,0,0.92);
-  border-left: 1px solid rgba(120,40,10,0.3);
-  border-right: 1px solid rgba(120,40,10,0.3);
+  background: #faf8f4;
   scrollbar-width: thin;
-  scrollbar-color: rgba(120,40,10,0.4) transparent;
+  scrollbar-color: rgba(45,92,78,0.2) transparent;
 }
 
 .messages-area::-webkit-scrollbar { width: 4px; }
-.messages-area::-webkit-scrollbar-thumb { background: rgba(120,40,10,0.5); border-radius: 2px; }
+.messages-area::-webkit-scrollbar-thumb { background: rgba(45,92,78,0.25); border-radius: 2px; }
 
 .time-badge {
   text-align: center;
   margin: 8px 0 16px;
-  font-family: 'Jost', sans-serif;
+  font-family: Jost, sans-serif;
   font-size: 10px;
-  color: rgba(140,90,50,0.5);
+  color: rgba(100,90,80,0.45);
   letter-spacing: 1px;
 }
 
@@ -135,7 +104,7 @@ body {
 .vino-avatar {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #8b1a05, #c8401a);
+  background: #2D5C4E;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -149,37 +118,36 @@ body {
   max-width: 78%;
   padding: 14px 18px;
   border-radius: 18px;
-  font-family: 'Jost', sans-serif;
+  font-family: Jost, sans-serif;
   font-size: 14px;
   line-height: 1.7;
   font-weight: 300;
 }
 
 .message-bubble.user {
-  background: linear-gradient(135deg, #7a2010, #5a1208);
-  color: #fde8d0;
+  background: #8B5741;
+  color: #ffffff;
   border-radius: 18px 18px 4px 18px;
-  border: 1px solid rgba(180,70,30,0.4);
 }
 
 .message-bubble.assistant {
-  background: rgba(35,15,5,0.9);
-  color: #e8cba8;
+  background: #ffffff;
+  color: #3a3028;
   border-radius: 18px 18px 18px 4px;
-  border: 1px solid rgba(100,40,15,0.5);
+  border: 1px solid rgba(45,92,78,0.12);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .suggestions-area {
   padding: 12px 20px 4px;
-  background: rgba(15,5,0,0.92);
-  border-left: 1px solid rgba(120,40,10,0.3);
-  border-right: 1px solid rgba(120,40,10,0.3);
+  background: #faf8f4;
+  border-top: 1px solid rgba(45,92,78,0.08);
 }
 
 .suggestions-label {
-  font-family: 'Jost', sans-serif;
+  font-family: Jost, sans-serif;
   font-size: 10px;
-  color: rgba(160,100,50,0.6);
+  color: rgba(100,90,80,0.5);
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -198,11 +166,11 @@ body {
 .suggestion-chip {
   flex-shrink: 0;
   padding: 7px 14px;
-  background: rgba(80,25,8,0.6);
-  border: 1px solid rgba(140,60,20,0.5);
+  background: #ffffff;
+  border: 1px solid rgba(45,92,78,0.3);
   border-radius: 20px;
-  color: #d4a574;
-  font-family: 'Jost', sans-serif;
+  color: #2D5C4E;
+  font-family: Jost, sans-serif;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -210,15 +178,14 @@ body {
 }
 
 .suggestion-chip:hover {
-  background: rgba(120,40,15,0.8);
-  border-color: rgba(200,80,30,0.6);
-  color: #f5c898;
+  background: #2D5C4E;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
 .input-area {
-  background: rgba(20,8,2,0.95);
-  border: 1px solid rgba(120,40,10,0.4);
+  background: #ffffff;
+  border-top: 1px solid rgba(45,92,78,0.1);
   border-radius: 0 0 20px 20px;
   padding: 16px 20px;
   display: flex;
@@ -228,12 +195,12 @@ body {
 
 .input-field {
   flex: 1;
-  background: rgba(40,15,5,0.8);
-  border: 1px solid rgba(120,50,15,0.4);
+  background: #f5f2ed;
+  border: 1px solid rgba(45,92,78,0.2);
   border-radius: 14px;
   padding: 12px 16px;
-  color: #e8cba8;
-  font-family: 'Jost', sans-serif;
+  color: #3a3028;
+  font-family: Jost, sans-serif;
   font-size: 14px;
   font-weight: 300;
   resize: none;
@@ -244,13 +211,13 @@ body {
   line-height: 1.5;
 }
 
-.input-field::placeholder { color: rgba(160,100,60,0.5); }
-.input-field:focus { border-color: rgba(180,70,30,0.7); }
+.input-field::placeholder { color: rgba(80,70,60,0.4); }
+.input-field:focus { border-color: rgba(45,92,78,0.5); }
 
 .send-button {
   width: 46px;
   height: 46px;
-  background: linear-gradient(135deg, #c8401a, #8b1a05);
+  background: #2D5C4E;
   border: none;
   border-radius: 13px;
   cursor: pointer;
@@ -259,27 +226,22 @@ body {
   justify-content: center;
   transition: all 0.2s ease;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(200,64,26,0.35);
+  box-shadow: 0 4px 12px rgba(45,92,78,0.3);
 }
 
 .send-button:hover:not(:disabled) {
+  background: #1a3d30;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(200,64,26,0.5);
 }
 
 .send-button:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.typing-indicator {
-  display: flex;
-  gap: 4px;
-  padding: 4px 2px;
-  align-items: center;
-}
+.typing-indicator { display: flex; gap: 4px; padding: 4px 2px; align-items: center; }
 
 .typing-dot {
   width: 7px;
   height: 7px;
-  background: rgba(180,100,50,0.7);
+  background: rgba(45,92,78,0.5);
   border-radius: 50%;
   animation: typing 1.2s infinite;
 }
@@ -294,16 +256,9 @@ body {
 </style>
 </head>
 <body>
-
 <div class="chat-container">
   <div class="chat-header">
-    <div class="logo-area">
-      <div class="logo-icon">🍷</div>
-      <div>
-        <div class="header-title">The Wine Spa</div>
-        <div class="header-subtitle">Portland's Home of Vinotherapy</div>
-      </div>
-    </div>
+    <img class="logo-img" src="data:image/png;base64,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" alt="The Wine Spa" />
     <div class="status-line">
       <span class="status-dot"></span>
       <span class="status-text">Vino is online — ask me anything</span>
@@ -313,8 +268,8 @@ body {
   <div class="messages-area" id="messages">
     <div class="time-badge">TODAY</div>
     <div class="message-row assistant">
-      <div class="vino-avatar">🍷</div>
-      <div class="message-bubble assistant">Hi! I'm Vino, your Wine Spa concierge 🍷 Whether you're curious about vinotherapy, looking for the perfect treatment, or planning a group celebration — I'm here to help. What can I do for you?</div>
+      <div class="vino-avatar">&#127863;</div>
+      <div class="message-bubble assistant">Hi! I'm Vino, your Wine Spa concierge &#127863; Whether you're curious about vinotherapy, looking for the perfect treatment, or planning a group celebration — I'm here to help. What can I do for you?</div>
     </div>
   </div>
 
@@ -322,11 +277,11 @@ body {
     <div class="suggestions-label">Try asking</div>
     <div class="suggestions-scroll">
       <button class="suggestion-chip" onclick="sendSuggestion(this)">What is vinotherapy?</button>
-      <button class="suggestion-chip" onclick="sendSuggestion(this)">What's your most popular treatment?</button>
-      <button class="suggestion-chip" onclick="sendSuggestion(this)">Do you have options for couples?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Most popular treatment?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Options for couples?</button>
       <button class="suggestion-chip" onclick="sendSuggestion(this)">How much does it cost?</button>
-      <button class="suggestion-chip" onclick="sendSuggestion(this)">Can I book a bachelorette party?</button>
-      <button class="suggestion-chip" onclick="sendSuggestion(this)">What's the difference between Portland and Dundee?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Bachelorette party?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Portland vs Dundee?</button>
     </div>
   </div>
 
@@ -342,201 +297,98 @@ body {
 </div>
 
 <script>
-const SYSTEM_PROMPT = `You are Vino, the friendly and knowledgeable AI concierge for The Wine Spa — Portland's first and only wine spa, and one of Time Magazine's 100 Greatest Places to Visit in 2025. You speak with warmth, a little wit, and genuine enthusiasm for what makes this place special. You never sound robotic or corporate.
-
-Your job is to answer questions, help guests choose the right treatment, and guide them toward booking. Always end responses with a gentle nudge toward booking when appropriate.
-
-Booking link (Portland): https://thewinespa.zenoti.com/webstoreNew/services
-Booking link (Dundee): https://thewinespa.zenoti.com/webstoreNew/services/0181a2fe-f8dc-43dd-b963-9e819e5858d2
-Gift cards: https://thewinespa.zenoti.com/webstoreNew/giftcards/37b722db-0e04-4ca8-8abd-abec2b3feb5a
-Group bookings: call 503-946-8450 or email hello@thewinespapdx.com
-Website: https://thewinespa.com
-
-ABOUT THE WINE SPA:
-The Wine Spa is Portland's first dedicated wine spa and the first of its kind in the US. Inspired by vinotherapy traditions from Eastern Europe and ancient history (Cleopatra bathed in wine!), it combines Willamette Valley wines with modern wellness science. Named one of Time's 100 Greatest Places in the World to Visit in 2025. Woman-owned. Eco-conscious — they upcycle surplus wine from local Willamette Valley wineries (current partner: Terra Vina Winery).
-
-WHAT IS VINOTHERAPY?
-Vinotherapy harnesses the antioxidant power of grape and vine — resveratrol, polyphenols, vitamins — for skincare and relaxation. The soaking tubs contain a blend of epsom salts, botanicals, warm water, and wine, set to 100-104 degrees. Rich in antioxidants that combat aging, hydrate skin, and promote collagen production. Multi-sensory: wine scent, soft jets, low lighting.
-
-PORTLAND LOCATION:
-Address: 1517 NE Broadway, Portland, OR 97232
-Phone: 503-946-8450
-Hours: Sunday 12-6pm, Monday 12-6pm, Tuesday 11-7pm, Wednesday CLOSED, Thursday 11-7pm, Friday 11-7pm, Saturday 10-7pm
-Facility: 10 rooms — 4 vinotherapy tub rooms, 5 massage rooms, 1 couples massage room
-
-DUNDEE LOCATION:
-Located inside The Dundee Hotel, Dundee Hills, Willamette Valley wine country. Features vinotherapy foot soaks, massages, facials, wine tasting flights, and a wine bar. Social spa designed for relaxing and celebrating.
-
-PORTLAND VINOTHERAPY PACKAGES:
-- The Willamette: 150 mins, $399 — wine soak + 50-min massage + grape glow body scrub + 30-min facial. Ultimate package.
-- Que Syrah: 85 mins, $249 — wine soak + hydrating body treatment + 30-min facial
-- Pinot Dreams Deluxe: 105 mins, $275 — wine soak + 80-min massage + hot towels. Most popular extended version.
-- Pinot Dreams: 75 mins, $199 — wine soak + 50-min massage + hot towels. Guest favorite.
-- Grape Escape: 75 mins, $199 — wine soak + 50-min Caudalie facial. Face-focused.
-- The Merlot Glow: 75 mins, $149 — body scrub + wine soak + hydrating body treatment.
-- D-I-Wine for 1: 45 mins, $99 — DIY wine soak with self-applied scrub + face mask + glass of wine.
-- D-I-Wine for 2: 45 mins, $179 — same as above for two people sharing a tub.
-
-PORTLAND MASSAGES:
-- Relaxation Massage: 50 min $125 / 80 min $199
-- Deep Tissue Flow: 50 min $125 / 80 min $199
-- 2-Hour Massage: 120 mins, $279
-- Four-Hands Massage: 50 min $299 / 80 min $349
-- Duet Massage (side by side for two, includes wine): 50 min $249 / 80 min $399
-- Reflexology: 50 min $150 / 80 min $225
-
-PORTLAND FACIALS:
-- Vino Express Facial: 30 min, $99
-- Resveratrol Lift: 50 min, $235
-- Dermaplane VinoGlow: 50 min, $235
-- Custom Facial: 80 min, $235
-- Lymphatic Drainage Facial: 60 min, $179
-
-ADD-ONS: Hot Stone +$35, CBD Relief +$30, Scalp Massage +$20, Charcuterie $65/$125/$199
-
-DUNDEE VINOTHERAPY PACKAGES (foot soaks instead of full tub):
-- The Willamette: 120 mins, $399 — foot soak + 50-min massage + 30-min facial
-- Pinot Dreams Deluxe: 100 mins, $249 — foot soak + 80-min massage
-- Pinot Dreams: 70 mins, $175 — foot soak + 50-min massage
-- Grape Escape: 70 mins, $199 — foot soak + 50-min facial
-- The Vino Duet: 70 min $299 / 100 min $399 — couples foot soak + side by side treatment
-
-DUNDEE FOOT SOAKS:
-- The Grape Vine: 50 min, $125 — Pinot Noir soak + massage + wine
-- The Rose: 40 min, $99 — rose wine + rose buds + massage + wine
-- The Gris: 40 min, $99 — white wine + eucalyptus + peppermint + massage + wine
-
-DUNDEE ADD-ONS: Wine Tasting Flight +$35 (Dundee exclusive)
-
-PRIVATE EVENTS AND GROUPS:
-Perfect for birthdays and bachelorettes. Groups up to 10.
-Host rewards: bring 3 friends = $50 off, bring 5 friends = $100 off, bring 8 friends = FREE treatment up to $225 + private spa.
-All groups of 4+ get a bottle of wine.
-Must book by calling 503-946-8450 or emailing hello@thewinespapdx.com.
-Book 2-4 weeks in advance especially for weekends.
-
-FAQ:
-- Must be 21+ for vinotherapy
-- Rooms are fully private, wear whatever you want
-- Two people can share a tub but it is cozy, separate tubs recommended
-- Not intoxicating, alcohol does not absorb through skin
-- Will not stain skin
-- Does smell like wine
-- Non-alcoholic option available with Cabernet bath bombs
-- No outside alcohol allowed
-- Pregnant guests should consult physician first
-
-Keep responses concise, warm, and helpful. When recommending, ask one or two quick questions first. Always include a booking link when nudging toward booking.`;
+const SYSTEM_PROMPT = "You are Vino, the friendly and knowledgeable AI concierge for The Wine Spa. Portland's first and only wine spa, named one of Time Magazine's 100 Greatest Places to Visit in 2025. Speak with warmth and genuine enthusiasm. Guide guests toward booking. Booking Portland: https://thewinespa.zenoti.com/webstoreNew/services. Booking Dundee: https://thewinespa.zenoti.com/webstoreNew/services/0181a2fe-f8dc-43dd-b963-9e819e5858d2. Phone: 503-946-8450. Email: hello@thewinespapdx.com. PORTLAND: 1517 NE Broadway, Portland OR 97232. Hours: Sun-Mon 12-6pm, Tue 11-7pm, Wed CLOSED, Thu-Fri 11-7pm, Sat 10-7pm. DUNDEE: inside The Dundee Hotel, wine country. PACKAGES PORTLAND: Willamette $399 150min wine soak+massage+scrub+facial. Que Syrah $249 85min wine soak+body treatment+facial. Pinot Dreams Deluxe $275 105min wine soak+80min massage. Pinot Dreams $199 75min wine soak+50min massage guest favorite. Grape Escape $199 75min wine soak+facial. Merlot Glow $149 75min scrub+soak+body treatment. D-I-Wine for 1 $99 45min DIY soak. D-I-Wine for 2 $179 45min DIY soak for two. MASSAGES: Relaxation 50min $125/80min $199. Deep Tissue 50min $125/80min $199. Duet couples 50min $249/80min $399. FACIALS: Vino Express 30min $99. Resveratrol Lift 50min $235. GROUPS: up to 10 people, call to book, 2-4 weeks advance. FAQ: must be 21+, rooms fully private, not intoxicating, will not stain skin. Always be warm and concise.";
 
 let messages = [];
 let loading = false;
 
-const input = document.getElementById('input');
-const sendBtn = document.getElementById('sendBtn');
-const messagesArea = document.getElementById('messages');
-const suggestions = document.getElementById('suggestions');
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("sendBtn");
+const messagesArea = document.getElementById("messages");
+const suggestions = document.getElementById("suggestions");
 
-input.addEventListener('input', () => {
+input.addEventListener("input", () => {
   sendBtn.disabled = !input.value.trim() || loading;
 });
 
 function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+  el.style.height = "auto";
+  el.style.height = Math.min(el.scrollHeight, 120) + "px";
 }
 
 function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
+  if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     if (!sendBtn.disabled) sendMessage();
   }
 }
 
-function sendSuggestion(btn) {
-  sendMessage(btn.textContent);
-}
+function sendSuggestion(btn) { sendMessage(btn.textContent); }
 
 function addMessage(role, content) {
-  const row = document.createElement('div');
-  row.className = `message-row ${role}`;
-
-  if (role === 'assistant') {
-    const avatar = document.createElement('div');
-    avatar.className = 'vino-avatar';
-    avatar.textContent = '🍷';
+  const row = document.createElement("div");
+  row.className = "message-row " + role;
+  if (role === "assistant") {
+    const avatar = document.createElement("div");
+    avatar.className = "vino-avatar";
+    avatar.textContent = "\u{1F377}";
     row.appendChild(avatar);
   }
-
-  const bubble = document.createElement('div');
-  bubble.className = `message-bubble ${role}`;
-  bubble.innerHTML = content.replace(/\n/g, '<br>');
+  const bubble = document.createElement("div");
+  bubble.className = "message-bubble " + role;
+  bubble.innerHTML = content.replace(/\n/g, "<br>");
   row.appendChild(bubble);
-
   messagesArea.appendChild(row);
   messagesArea.scrollTop = messagesArea.scrollHeight;
-  return bubble;
 }
 
 function showTyping() {
-  const row = document.createElement('div');
-  row.className = 'message-row assistant';
-  row.id = 'typing';
-
-  const avatar = document.createElement('div');
-  avatar.className = 'vino-avatar';
-  avatar.textContent = '🍷';
+  const row = document.createElement("div");
+  row.className = "message-row assistant";
+  row.id = "typing";
+  const avatar = document.createElement("div");
+  avatar.className = "vino-avatar";
+  avatar.textContent = "\u{1F377}";
   row.appendChild(avatar);
-
-  const bubble = document.createElement('div');
-  bubble.className = 'message-bubble assistant';
-  bubble.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  const bubble = document.createElement("div");
+  bubble.className = "message-bubble assistant";
+  bubble.innerHTML = "<div class=\"typing-indicator\"><div class=\"typing-dot\"></div><div class=\"typing-dot\"></div><div class=\"typing-dot\"></div></div>";
   row.appendChild(bubble);
-
   messagesArea.appendChild(row);
   messagesArea.scrollTop = messagesArea.scrollHeight;
 }
 
 function removeTyping() {
-  const typing = document.getElementById('typing');
-  if (typing) typing.remove();
+  const t = document.getElementById("typing");
+  if (t) t.remove();
 }
 
 async function sendMessage(text) {
   const userText = text || input.value.trim();
   if (!userText || loading) return;
-
-  input.value = '';
-  input.style.height = 'auto';
+  input.value = "";
+  input.style.height = "auto";
   sendBtn.disabled = true;
-  suggestions.style.display = 'none';
+  suggestions.style.display = "none";
   loading = true;
-
-  messages.push({ role: 'user', content: userText });
-  addMessage('user', userText);
+  messages.push({ role: "user", content: userText });
+  addMessage("user", userText);
   showTyping();
-
   try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: messages
-      })
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, system: SYSTEM_PROMPT, messages: messages })
     });
-
     const data = await response.json();
     const reply = data.reply || "Sorry, I had trouble with that. Please try again!";
     removeTyping();
-    messages.push({ role: 'assistant', content: reply });
-    addMessage('assistant', reply);
+    messages.push({ role: "assistant", content: reply });
+    addMessage("assistant", reply);
   } catch(e) {
     removeTyping();
-    addMessage('assistant', 'Something went wrong. Please try again!');
+    addMessage("assistant", "Something went wrong. Please try again!");
   }
-
   loading = false;
   sendBtn.disabled = !input.value.trim();
   input.focus();
